@@ -23,3 +23,19 @@ build/Release
 # Deployed apps should consider commenting this line out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
+bower_components
+vendor
+
+# temporarly files
+*.sw[op]
+*~
+*.tmp
+.DS_Store
+
+# workspace files are user-specific
+*.sublime-workspace
+
+# project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+
