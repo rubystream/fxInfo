@@ -23,7 +23,10 @@
     "debug": "^1.0.4",
     "ejs": "^1.0.0",
     "express": "^4.8.5",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.3",
     "morgan": "^1.2.3",
+    "mqtt": "^0.3.12",
     "querystring": "^0.2.0",
     "request": "^2.40.0",
     "serve-favicon": "^2.1.1"

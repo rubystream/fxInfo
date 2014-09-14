@@ -39,3 +39,4 @@ vendor
 # proportion of contributors will probably not be using SublimeText
 # *.sublime-project
 
+config.js

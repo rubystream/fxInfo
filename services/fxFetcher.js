@@ -11,7 +11,7 @@ module.exports = function(context) {
   'use strict';
 
   var job = new CronJob({
-    'cronTime': '*/15 * * * * *',
+    'cronTime': context.cronTime,
     'onTick': function() {
       console.log('onTick: ' + new Date().toString());
       var url = 'http://download.finance.yahoo.com/d/quotes.csv?' +
@@ -26,6 +26,9 @@ module.exports = function(context) {
         }
         if (res.statusCode === 200) {
           console.log(body);
+          if (context.callback) {
+            context.callback(body);
+          }
         }
       });
     },
