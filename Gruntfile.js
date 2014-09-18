@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   "use strict";
 
   grunt.initConfig({
@@ -8,11 +8,6 @@ module.exports = function (grunt) {
       "options": {
         "ignores": ["node_modules/**/*.js"]
       }
-    },
-    "karma": {
-      "unit": {
-        "configFile": "karma.conf.js"
-        }
     }
   });
 
