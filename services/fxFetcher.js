@@ -23,11 +23,19 @@ module.exports = function(context) {
       request.get(url, function(err, res, body) {
         if (err) {
           console.log(err);
+          if (context.callback) {
+            context.callback(err, null);
+          }
         }
         if (res.statusCode === 200) {
           console.log(body);
           if (context.callback) {
-            context.callback(body);
+            context.callback(null, body);
+          }
+        } else {
+          console.log('statusCode: ' + res.statusCode);
+          if (context.callback) {
+            context.callback('statusCode: ' + res.statusCode, null);
           }
         }
       });
