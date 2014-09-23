@@ -32,34 +32,39 @@ var context = {
       console.log(error);
     } else if (data) {
 
+      try {
 
-      csv.parse(data, function(err, output) {
-        // console.log(output);
-        // the data is in following format:
-        // 's', 'n', 'd1', 't1', 'l1', 'p', 'b', 'a'
-        // With the following description:
-        // s:  'Symbol',
-        // n:  'Name',
-        // d1: 'Last Trade Date',
-        // t1: 'Last Trade Time',
-        // l1: 'Last Trade (Price Only)',
-        // p:  'Previous Close',
-        // b:  'Bid',
-        // a:  'Ask',
-        var result = _.map(output, function(item) {
-          return {
-            'symbol': item[0],
-            'name': item[1],
-            'lastTradeDate': moment.utc(item[2], 'MM/DD/YYYY').toJSON(),
-            'lastTradeTime': moment.utc(item[3], 'HH:mm').toJSON(),
-            'previousClose': item[4],
-            'bid': item[5],
-            'ask': item[6]
-          };
+        csv.parse(data, function(err, output) {
+          // console.log(output);
+          // the data is in following format:
+          // 's', 'n', 'd1', 't1', 'l1', 'p', 'b', 'a'
+          // With the following description:
+          // s:  'Symbol',
+          // n:  'Name',
+          // d1: 'Last Trade Date',
+          // t1: 'Last Trade Time',
+          // l1: 'Last Trade (Price Only)',
+          // p:  'Previous Close',
+          // b:  'Bid',
+          // a:  'Ask',
+          var result = _.map(output, function(item) {
+            return {
+              'symbol': item[0],
+              'name': item[1],
+              'lastTradeDate': moment.utc(item[2], 'MM/DD/YYYY').toJSON(),
+              'lastTradeTime': moment.utc(item[3], 'HH:mm').toJSON(),
+              'previousClose': item[4],
+              'bid': item[5],
+              'ask': item[6]
+            };
+          });
+          console.log(result);
+          mqttClient.publish('fxFetcher', JSON.stringify(result));
         });
-        console.log(result);
-        mqttClient.publish('fxFetcher', JSON.stringify(result));
-      });
+      } catch (e) {
+        /* handle error */
+        console.log(e);
+      }
     }
   }
 };
