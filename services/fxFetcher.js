@@ -20,25 +20,29 @@ module.exports = function(context) {
           f: ['s', 'n', 'd1', 't1', 'l1', 'p', 'b', 'a'].join('')
         });
 
-      request.get(url, function(err, res, body) {
-        if (err) {
-          console.log(err);
-          if (context.callback) {
-            context.callback(err, null);
+      try {
+        request.get(url, function(err, res, body) {
+          if (err) {
+            console.log(err);
+            if (context.callback) {
+              context.callback(err, null);
+            }
           }
-        }
-        if (res.statusCode === 200) {
-          console.log(body);
-          if (context.callback) {
-            context.callback(null, body);
+          if (res.statusCode === 200) {
+            console.log(body);
+            if (context.callback) {
+              context.callback(null, body);
+            }
+          } else {
+            console.log('statusCode: ' + res.statusCode);
+            if (context.callback) {
+              context.callback('statusCode: ' + res.statusCode, null);
+            }
           }
-        } else {
-          console.log('statusCode: ' + res.statusCode);
-          if (context.callback) {
-            context.callback('statusCode: ' + res.statusCode, null);
-          }
-        }
-      });
+        });
+      } catch (e) {
+        console.log(e);
+      }
     },
     'onComplete': function() {
       console.log('Done!');
