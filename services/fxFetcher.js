@@ -27,16 +27,19 @@ module.exports = function(context) {
             if (context.callback) {
               context.callback(err, null);
             }
-          }
-          if (res.statusCode === 200) {
-            console.log(body);
-            if (context.callback) {
-              context.callback(null, body);
-            }
+          } else if (res === undefined) {
+            console.log('Error: res is undefined!');
           } else {
-            console.log('statusCode: ' + res.statusCode);
-            if (context.callback) {
-              context.callback('statusCode: ' + res.statusCode, null);
+            if (res.statusCode === 200) {
+              console.log(body);
+              if (context.callback) {
+                context.callback(null, body);
+              }
+            } else {
+              console.log('statusCode: ' + res.statusCode);
+              if (context.callback) {
+                context.callback('statusCode: ' + res.statusCode, null);
+              }
             }
           }
         });
